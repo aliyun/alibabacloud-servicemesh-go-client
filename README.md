@@ -2,6 +2,12 @@
 [![GolangCI](https://golangci.com/badges/github.com/istio/client-go.svg)](https://golangci.com/r/github.com/istio/client-go)
 [![GoDoc](https://godoc.org/istio.io/client-go?status.svg)](https://godoc.org/istio.io/client-go)
 
+# The Istio API go client provided by Alibabacloud Service Mesh (ASM)
+
+This repository is the Istio API go client provided by Alibabacloud Service Mesh (ASM), which is compatible with [istio/client-go](https://github.com/istio/client-go). Besides ordinary Istio APIs, alibabacloud-servicemesh-go-client also provides ASM extension APIs such as TrafficLabel.
+
+Below is derived from istio community.
+
 # Golang Client Library for Istio APIs
 
 This go library contains clients that talk to Istio resources in a Kubernetes cluster.

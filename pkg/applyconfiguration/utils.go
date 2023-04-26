@@ -18,14 +18,16 @@ package applyconfiguration
 
 import (
 	v1alpha1 "istio.io/client-go/pkg/apis/extensions/v1alpha1"
+	v1beta1 "istio.io/client-go/pkg/apis/istio/v1beta1"
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
-	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
+	networkingv1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
 	securityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
 	telemetryv1alpha1 "istio.io/client-go/pkg/apis/telemetry/v1alpha1"
 	extensionsv1alpha1 "istio.io/client-go/pkg/applyconfiguration/extensions/v1alpha1"
+	istiov1beta1 "istio.io/client-go/pkg/applyconfiguration/istio/v1beta1"
 	metav1 "istio.io/client-go/pkg/applyconfiguration/meta/v1"
 	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
-	networkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
+	applyconfigurationnetworkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
 	applyconfigurationsecurityv1beta1 "istio.io/client-go/pkg/applyconfiguration/security/v1beta1"
 	applyconfigurationtelemetryv1alpha1 "istio.io/client-go/pkg/applyconfiguration/telemetry/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -39,6 +41,10 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 	// Group=extensions.istio.io, Version=v1alpha1
 	case v1alpha1.SchemeGroupVersion.WithKind("WasmPlugin"):
 		return &extensionsv1alpha1.WasmPluginApplyConfiguration{}
+
+		// Group=istio.alibabacloud.com, Version=v1beta1
+	case v1beta1.SchemeGroupVersion.WithKind("TrafficLabel"):
+		return &istiov1beta1.TrafficLabelApplyConfiguration{}
 
 		// Group=meta.k8s.io, Version=v1
 	case v1.SchemeGroupVersion.WithKind("ManagedFieldsEntry"):
@@ -69,22 +75,22 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &networkingv1alpha3.WorkloadGroupApplyConfiguration{}
 
 		// Group=networking.istio.io, Version=v1beta1
-	case v1beta1.SchemeGroupVersion.WithKind("DestinationRule"):
-		return &networkingv1beta1.DestinationRuleApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("Gateway"):
-		return &networkingv1beta1.GatewayApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("ProxyConfig"):
-		return &networkingv1beta1.ProxyConfigApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("ServiceEntry"):
-		return &networkingv1beta1.ServiceEntryApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("Sidecar"):
-		return &networkingv1beta1.SidecarApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("VirtualService"):
-		return &networkingv1beta1.VirtualServiceApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("WorkloadEntry"):
-		return &networkingv1beta1.WorkloadEntryApplyConfiguration{}
-	case v1beta1.SchemeGroupVersion.WithKind("WorkloadGroup"):
-		return &networkingv1beta1.WorkloadGroupApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("DestinationRule"):
+		return &applyconfigurationnetworkingv1beta1.DestinationRuleApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("Gateway"):
+		return &applyconfigurationnetworkingv1beta1.GatewayApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("ProxyConfig"):
+		return &applyconfigurationnetworkingv1beta1.ProxyConfigApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("ServiceEntry"):
+		return &applyconfigurationnetworkingv1beta1.ServiceEntryApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("Sidecar"):
+		return &applyconfigurationnetworkingv1beta1.SidecarApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("VirtualService"):
+		return &applyconfigurationnetworkingv1beta1.VirtualServiceApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("WorkloadEntry"):
+		return &applyconfigurationnetworkingv1beta1.WorkloadEntryApplyConfiguration{}
+	case networkingv1beta1.SchemeGroupVersion.WithKind("WorkloadGroup"):
+		return &applyconfigurationnetworkingv1beta1.WorkloadGroupApplyConfiguration{}
 
 		// Group=security.istio.io, Version=v1beta1
 	case securityv1beta1.SchemeGroupVersion.WithKind("AuthorizationPolicy"):

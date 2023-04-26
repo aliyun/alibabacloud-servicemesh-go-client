@@ -24,6 +24,7 @@ import (
 	versioned "istio.io/client-go/pkg/clientset/versioned"
 	extensions "istio.io/client-go/pkg/informers/externalversions/extensions"
 	internalinterfaces "istio.io/client-go/pkg/informers/externalversions/internalinterfaces"
+	istio "istio.io/client-go/pkg/informers/externalversions/istio"
 	networking "istio.io/client-go/pkg/informers/externalversions/networking"
 	security "istio.io/client-go/pkg/informers/externalversions/security"
 	telemetry "istio.io/client-go/pkg/informers/externalversions/telemetry"
@@ -245,6 +246,7 @@ type SharedInformerFactory interface {
 	InformerFor(obj runtime.Object, newFunc internalinterfaces.NewInformerFunc) cache.SharedIndexInformer
 
 	Extensions() extensions.Interface
+	Istio() istio.Interface
 	Networking() networking.Interface
 	Security() security.Interface
 	Telemetry() telemetry.Interface
@@ -252,6 +254,10 @@ type SharedInformerFactory interface {
 
 func (f *sharedInformerFactory) Extensions() extensions.Interface {
 	return extensions.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Istio() istio.Interface {
+	return istio.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Networking() networking.Interface {

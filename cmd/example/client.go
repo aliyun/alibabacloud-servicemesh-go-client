@@ -26,6 +26,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 
 	versionedclient "istio.io/client-go/pkg/clientset/versioned"
+
+	_ "istio.io/api/alibabacloud/v1beta1"
 )
 
 func main() {

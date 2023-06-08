@@ -21,6 +21,7 @@ import (
 	"net/http"
 
 	extensionsv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/extensions/v1alpha1"
+	istiov1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/istio/v1beta1"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
@@ -33,6 +34,7 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	ExtensionsV1alpha1() extensionsv1alpha1.ExtensionsV1alpha1Interface
+	IstioV1beta1() istiov1beta1.IstioV1beta1Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
 	NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface
 	SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface
@@ -43,6 +45,7 @@ type Interface interface {
 type Clientset struct {
 	*discovery.DiscoveryClient
 	extensionsV1alpha1 *extensionsv1alpha1.ExtensionsV1alpha1Client
+	istioV1beta1       *istiov1beta1.IstioV1beta1Client
 	networkingV1alpha3 *networkingv1alpha3.NetworkingV1alpha3Client
 	networkingV1beta1  *networkingv1beta1.NetworkingV1beta1Client
 	securityV1beta1    *securityv1beta1.SecurityV1beta1Client
@@ -52,6 +55,11 @@ type Clientset struct {
 // ExtensionsV1alpha1 retrieves the ExtensionsV1alpha1Client
 func (c *Clientset) ExtensionsV1alpha1() extensionsv1alpha1.ExtensionsV1alpha1Interface {
 	return c.extensionsV1alpha1
+}
+
+// IstioV1beta1 retrieves the IstioV1beta1Client
+func (c *Clientset) IstioV1beta1() istiov1beta1.IstioV1beta1Interface {
+	return c.istioV1beta1
 }
 
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
@@ -122,6 +130,10 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
+	cs.istioV1beta1, err = istiov1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
+	if err != nil {
+		return nil, err
+	}
 	cs.networkingV1alpha3, err = networkingv1alpha3.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
@@ -160,6 +172,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.extensionsV1alpha1 = extensionsv1alpha1.New(c)
+	cs.istioV1beta1 = istiov1beta1.New(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.New(c)
 	cs.networkingV1beta1 = networkingv1beta1.New(c)
 	cs.securityV1beta1 = securityv1beta1.New(c)

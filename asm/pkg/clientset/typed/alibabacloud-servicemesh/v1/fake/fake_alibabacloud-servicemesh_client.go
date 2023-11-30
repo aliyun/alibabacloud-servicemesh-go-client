@@ -16,7 +16,7 @@
 package fake
 
 import (
-	v1 "istio.io/client-go/asmpkg/clientset/typed/alibabacloud-servicemesh/v1"
+	v1 "istio.io/client-go/asm/pkg/clientset/typed/alibabacloud-servicemesh/v1"
 
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"

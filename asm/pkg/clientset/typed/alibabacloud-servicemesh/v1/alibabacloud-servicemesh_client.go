@@ -16,7 +16,7 @@
 package v1
 
 import (
-	"istio.io/client-go/asmpkg/clientset/scheme"
+	"istio.io/client-go/asm/pkg/clientset/scheme"
 	"net/http"
 
 	v1 "istio.io/api/alibabacloud-servicemesh/v1"

@@ -16,7 +16,7 @@
 package clientset
 
 import (
-	istiov1 "istio.io/client-go/asmpkg/clientset/typed/alibabacloud-servicemesh/v1"
+	istiov1 "istio.io/client-go/asm/pkg/clientset/typed/alibabacloud-servicemesh/v1"
 	"fmt"
 	"net/http"
 

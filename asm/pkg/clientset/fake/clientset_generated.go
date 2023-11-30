@@ -16,9 +16,9 @@
 package fake
 
 import (
-	clientset "istio.io/client-go/asmpkg/clientset"
-	istiov1 "istio.io/client-go/asmpkg/clientset/typed/alibabacloud-servicemesh/v1"
-	fakeistiov1 "istio.io/client-go/asmpkg/clientset/typed/alibabacloud-servicemesh/v1/fake"
+	clientset "istio.io/client-go/asm/pkg/clientset"
+	istiov1 "istio.io/client-go/asm/pkg/clientset/typed/alibabacloud-servicemesh/v1"
+	fakeistiov1 "istio.io/client-go/asm/pkg/clientset/typed/alibabacloud-servicemesh/v1/fake"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"

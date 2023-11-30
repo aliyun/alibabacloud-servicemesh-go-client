@@ -16,7 +16,7 @@
 package v1
 
 import (
-	scheme "istio.io/client-go/asmpkg/clientset/scheme"
+	scheme "istio.io/client-go/asm/pkg/clientset/scheme"
 	"context"
 	"time"
 

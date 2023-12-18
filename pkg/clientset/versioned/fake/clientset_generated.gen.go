@@ -20,6 +20,8 @@ import (
 	clientset "istio.io/client-go/pkg/clientset/versioned"
 	extensionsv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/extensions/v1alpha1"
 	fakeextensionsv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/extensions/v1alpha1/fake"
+	istiov1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/istio/v1beta1"
+	fakeistiov1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/istio/v1beta1/fake"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	fakenetworkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3/fake"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
@@ -90,6 +92,11 @@ var (
 // ExtensionsV1alpha1 retrieves the ExtensionsV1alpha1Client
 func (c *Clientset) ExtensionsV1alpha1() extensionsv1alpha1.ExtensionsV1alpha1Interface {
 	return &fakeextensionsv1alpha1.FakeExtensionsV1alpha1{Fake: &c.Fake}
+}
+
+// IstioV1beta1 retrieves the IstioV1beta1Client
+func (c *Clientset) IstioV1beta1() istiov1beta1.IstioV1beta1Interface {
+	return &fakeistiov1beta1.FakeIstioV1beta1{Fake: &c.Fake}
 }
 
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client

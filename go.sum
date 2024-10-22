@@ -1,5 +1,5 @@
-github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20240805035450-4f8335d521e7 h1:lJqRwyS5S6KTNOfJfOPEBipizn81S6OqVaBlicFLKAg=
-github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20240805035450-4f8335d521e7/go.mod h1:CFeiWUHvWUpizarvBdz7RkItTw0lUoTNqOtaTeBO3vI=
+github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20241022011211-f4bd1f76baaa h1:CueX9+Igoo9ohhGPio9sYmxS7KV1zi7UXYSD6n+qmYs=
+github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20241022011211-f4bd1f76baaa/go.mod h1:CFeiWUHvWUpizarvBdz7RkItTw0lUoTNqOtaTeBO3vI=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

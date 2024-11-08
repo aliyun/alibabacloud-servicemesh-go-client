@@ -1,3 +1,5 @@
+github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20241107103105-ce820cf1f3d7 h1:1tzYtMsKx59iXE3mdjXER9caMyDLvvveYSzYo3YKawQ=
+github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20241107103105-ce820cf1f3d7/go.mod h1:xlSC3YkbPmGmFtqYwkI6sIE0gO6roIS7hCsXF9Taa5Y=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -138,8 +140,6 @@ gopkg.in/yaml.v2 v2.4.0/go.mod h1:RDklbk79AGWmwhnvt/jBztapEOGDOx6ZbXqjP6csGnQ=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
-istio.io/api v1.23.3-0.20241007150425-eb56b2cffca7 h1:c8RwLi4qSqCn36t5B2WFkwRDY+qPZ1XhlLMEIoJDCcs=
-istio.io/api v1.23.3-0.20241007150425-eb56b2cffca7/go.mod h1:QPSTGXuIQdnZFEm3myf9NZ5uBMwCdJWUvfj9ZZ+2oBM=
 k8s.io/api v0.30.0 h1:siWhRq7cNjy2iHssOB9SCGNCl2spiF1dO3dABqZ8niA=
 k8s.io/api v0.30.0/go.mod h1:OPlaYhoHs8EQ1ql0R/TsUgaRPhpKNxIMrKQfWUp8QSE=
 k8s.io/apimachinery v0.30.0 h1:qxVPsyDM5XS96NIh9Oj6LavoVFYff/Pon9cZeDIkHHA=

@@ -30,7 +30,7 @@ import (
 // ASMSwimLanesGetter has a method to return a ASMSwimLaneInterface.
 // A group's client should implement this interface.
 type ASMSwimLanesGetter interface {
-	ASMSwimLanes(namespace string) ASMSwimLaneInterface
+	ASMSwimLanes() ASMSwimLaneInterface
 }
 
 // ASMSwimLaneInterface has methods to work with ASMSwimLane resources.
@@ -50,14 +50,12 @@ type ASMSwimLaneInterface interface {
 // aSMSwimLanes implements ASMSwimLaneInterface
 type aSMSwimLanes struct {
 	client rest.Interface
-	ns     string
 }
 
 // newASMSwimLanes returns a ASMSwimLanes
-func newASMSwimLanes(c *IstioV1Client, namespace string) *aSMSwimLanes {
+func newASMSwimLanes(c *IstioV1Client) *aSMSwimLanes {
 	return &aSMSwimLanes{
 		client: c.RESTClient(),
-		ns:     namespace,
 	}
 }
 
@@ -65,7 +63,6 @@ func newASMSwimLanes(c *IstioV1Client, namespace string) *aSMSwimLanes {
 func (c *aSMSwimLanes) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ASMSwimLane, err error) {
 	result = &v1.ASMSwimLane{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
@@ -82,7 +79,6 @@ func (c *aSMSwimLanes) List(ctx context.Context, opts metav1.ListOptions) (resul
 	}
 	result = &v1.ASMSwimLaneList{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -99,7 +95,6 @@ func (c *aSMSwimLanes) Watch(ctx context.Context, opts metav1.ListOptions) (watc
 	}
 	opts.Watch = true
 	return c.client.Get().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -110,7 +105,6 @@ func (c *aSMSwimLanes) Watch(ctx context.Context, opts metav1.ListOptions) (watc
 func (c *aSMSwimLanes) Create(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, opts metav1.CreateOptions) (result *v1.ASMSwimLane, err error) {
 	result = &v1.ASMSwimLane{}
 	err = c.client.Post().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(aSMSwimLane).
@@ -123,7 +117,6 @@ func (c *aSMSwimLanes) Create(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, 
 func (c *aSMSwimLanes) Update(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, opts metav1.UpdateOptions) (result *v1.ASMSwimLane, err error) {
 	result = &v1.ASMSwimLane{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		Name(aSMSwimLane.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -138,7 +131,6 @@ func (c *aSMSwimLanes) Update(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, 
 func (c *aSMSwimLanes) UpdateStatus(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, opts metav1.UpdateOptions) (result *v1.ASMSwimLane, err error) {
 	result = &v1.ASMSwimLane{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		Name(aSMSwimLane.Name).
 		SubResource("status").
@@ -152,7 +144,6 @@ func (c *aSMSwimLanes) UpdateStatus(ctx context.Context, aSMSwimLane *v1.ASMSwim
 // Delete takes name of the aSMSwimLane and deletes it. Returns an error if one occurs.
 func (c *aSMSwimLanes) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		Name(name).
 		Body(&opts).
@@ -167,7 +158,6 @@ func (c *aSMSwimLanes) DeleteCollection(ctx context.Context, opts metav1.DeleteO
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -180,7 +170,6 @@ func (c *aSMSwimLanes) DeleteCollection(ctx context.Context, opts metav1.DeleteO
 func (c *aSMSwimLanes) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ASMSwimLane, err error) {
 	result = &v1.ASMSwimLane{}
 	err = c.client.Patch(pt).
-		Namespace(c.ns).
 		Resource("asmswimlanes").
 		Name(name).
 		SubResource(subresources...).

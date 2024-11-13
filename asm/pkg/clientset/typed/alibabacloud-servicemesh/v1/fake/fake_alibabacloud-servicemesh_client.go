@@ -42,12 +42,12 @@ func (c *FakeIstioV1) ASMLocalRateLimiters(namespace string) v1.ASMLocalRateLimi
 	return &FakeASMLocalRateLimiters{c, namespace}
 }
 
-func (c *FakeIstioV1) ASMSwimLanes(namespace string) v1.ASMSwimLaneInterface {
-	return &FakeASMSwimLanes{c, namespace}
+func (c *FakeIstioV1) ASMSwimLanes() v1.ASMSwimLaneInterface {
+	return &FakeASMSwimLanes{c}
 }
 
-func (c *FakeIstioV1) ASMSwimLaneGroups(namespace string) v1.ASMSwimLaneGroupInterface {
-	return &FakeASMSwimLaneGroups{c, namespace}
+func (c *FakeIstioV1) ASMSwimLaneGroups() v1.ASMSwimLaneGroupInterface {
+	return &FakeASMSwimLaneGroups{c}
 }
 
 // RESTClient returns a RESTClient that is used to communicate

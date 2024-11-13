@@ -30,7 +30,7 @@ import (
 // ASMSwimLaneGroupsGetter has a method to return a ASMSwimLaneGroupInterface.
 // A group's client should implement this interface.
 type ASMSwimLaneGroupsGetter interface {
-	ASMSwimLaneGroups(namespace string) ASMSwimLaneGroupInterface
+	ASMSwimLaneGroups() ASMSwimLaneGroupInterface
 }
 
 // ASMSwimLaneGroupInterface has methods to work with ASMSwimLaneGroup resources.
@@ -50,14 +50,12 @@ type ASMSwimLaneGroupInterface interface {
 // aSMSwimLaneGroups implements ASMSwimLaneGroupInterface
 type aSMSwimLaneGroups struct {
 	client rest.Interface
-	ns     string
 }
 
 // newASMSwimLaneGroups returns a ASMSwimLaneGroups
-func newASMSwimLaneGroups(c *IstioV1Client, namespace string) *aSMSwimLaneGroups {
+func newASMSwimLaneGroups(c *IstioV1Client) *aSMSwimLaneGroups {
 	return &aSMSwimLaneGroups{
 		client: c.RESTClient(),
-		ns:     namespace,
 	}
 }
 
@@ -65,7 +63,6 @@ func newASMSwimLaneGroups(c *IstioV1Client, namespace string) *aSMSwimLaneGroups
 func (c *aSMSwimLaneGroups) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ASMSwimLaneGroup, err error) {
 	result = &v1.ASMSwimLaneGroup{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
@@ -82,7 +79,6 @@ func (c *aSMSwimLaneGroups) List(ctx context.Context, opts metav1.ListOptions) (
 	}
 	result = &v1.ASMSwimLaneGroupList{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -99,7 +95,6 @@ func (c *aSMSwimLaneGroups) Watch(ctx context.Context, opts metav1.ListOptions) 
 	}
 	opts.Watch = true
 	return c.client.Get().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -110,7 +105,6 @@ func (c *aSMSwimLaneGroups) Watch(ctx context.Context, opts metav1.ListOptions) 
 func (c *aSMSwimLaneGroups) Create(ctx context.Context, aSMSwimLaneGroup *v1.ASMSwimLaneGroup, opts metav1.CreateOptions) (result *v1.ASMSwimLaneGroup, err error) {
 	result = &v1.ASMSwimLaneGroup{}
 	err = c.client.Post().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(aSMSwimLaneGroup).
@@ -123,7 +117,6 @@ func (c *aSMSwimLaneGroups) Create(ctx context.Context, aSMSwimLaneGroup *v1.ASM
 func (c *aSMSwimLaneGroups) Update(ctx context.Context, aSMSwimLaneGroup *v1.ASMSwimLaneGroup, opts metav1.UpdateOptions) (result *v1.ASMSwimLaneGroup, err error) {
 	result = &v1.ASMSwimLaneGroup{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		Name(aSMSwimLaneGroup.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -138,7 +131,6 @@ func (c *aSMSwimLaneGroups) Update(ctx context.Context, aSMSwimLaneGroup *v1.ASM
 func (c *aSMSwimLaneGroups) UpdateStatus(ctx context.Context, aSMSwimLaneGroup *v1.ASMSwimLaneGroup, opts metav1.UpdateOptions) (result *v1.ASMSwimLaneGroup, err error) {
 	result = &v1.ASMSwimLaneGroup{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		Name(aSMSwimLaneGroup.Name).
 		SubResource("status").
@@ -152,7 +144,6 @@ func (c *aSMSwimLaneGroups) UpdateStatus(ctx context.Context, aSMSwimLaneGroup *
 // Delete takes name of the aSMSwimLaneGroup and deletes it. Returns an error if one occurs.
 func (c *aSMSwimLaneGroups) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		Name(name).
 		Body(&opts).
@@ -167,7 +158,6 @@ func (c *aSMSwimLaneGroups) DeleteCollection(ctx context.Context, opts metav1.De
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -180,7 +170,6 @@ func (c *aSMSwimLaneGroups) DeleteCollection(ctx context.Context, opts metav1.De
 func (c *aSMSwimLaneGroups) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ASMSwimLaneGroup, err error) {
 	result = &v1.ASMSwimLaneGroup{}
 	err = c.client.Patch(pt).
-		Namespace(c.ns).
 		Resource("asmswimlanegroups").
 		Name(name).
 		SubResource(subresources...).

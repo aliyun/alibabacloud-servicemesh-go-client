@@ -29,7 +29,6 @@ import (
 // FakeASMSwimLanes implements ASMSwimLaneInterface
 type FakeASMSwimLanes struct {
 	Fake *FakeIstioV1
-	ns   string
 }
 
 var asmswimlanesResource = v1.SchemeGroupVersion.WithResource("asmswimlanes")
@@ -39,8 +38,7 @@ var asmswimlanesKind = v1.SchemeGroupVersion.WithKind("ASMSwimLane")
 // Get takes name of the aSMSwimLane, and returns the corresponding aSMSwimLane object, and an error if there is any.
 func (c *FakeASMSwimLanes) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ASMSwimLane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(asmswimlanesResource, c.ns, name), &v1.ASMSwimLane{})
-
+		Invokes(testing.NewRootGetAction(asmswimlanesResource, name), &v1.ASMSwimLane{})
 	if obj == nil {
 		return nil, err
 	}
@@ -50,8 +48,7 @@ func (c *FakeASMSwimLanes) Get(ctx context.Context, name string, options metav1.
 // List takes label and field selectors, and returns the list of ASMSwimLanes that match those selectors.
 func (c *FakeASMSwimLanes) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ASMSwimLaneList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(asmswimlanesResource, asmswimlanesKind, c.ns, opts), &v1.ASMSwimLaneList{})
-
+		Invokes(testing.NewRootListAction(asmswimlanesResource, asmswimlanesKind, opts), &v1.ASMSwimLaneList{})
 	if obj == nil {
 		return nil, err
 	}
@@ -72,15 +69,13 @@ func (c *FakeASMSwimLanes) List(ctx context.Context, opts metav1.ListOptions) (r
 // Watch returns a watch.Interface that watches the requested aSMSwimLanes.
 func (c *FakeASMSwimLanes) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewWatchAction(asmswimlanesResource, c.ns, opts))
-
+		InvokesWatch(testing.NewRootWatchAction(asmswimlanesResource, opts))
 }
 
 // Create takes the representation of a aSMSwimLane and creates it.  Returns the server's representation of the aSMSwimLane, and an error, if there is any.
 func (c *FakeASMSwimLanes) Create(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, opts metav1.CreateOptions) (result *v1.ASMSwimLane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(asmswimlanesResource, c.ns, aSMSwimLane), &v1.ASMSwimLane{})
-
+		Invokes(testing.NewRootCreateAction(asmswimlanesResource, aSMSwimLane), &v1.ASMSwimLane{})
 	if obj == nil {
 		return nil, err
 	}
@@ -90,8 +85,7 @@ func (c *FakeASMSwimLanes) Create(ctx context.Context, aSMSwimLane *v1.ASMSwimLa
 // Update takes the representation of a aSMSwimLane and updates it. Returns the server's representation of the aSMSwimLane, and an error, if there is any.
 func (c *FakeASMSwimLanes) Update(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, opts metav1.UpdateOptions) (result *v1.ASMSwimLane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(asmswimlanesResource, c.ns, aSMSwimLane), &v1.ASMSwimLane{})
-
+		Invokes(testing.NewRootUpdateAction(asmswimlanesResource, aSMSwimLane), &v1.ASMSwimLane{})
 	if obj == nil {
 		return nil, err
 	}
@@ -102,8 +96,7 @@ func (c *FakeASMSwimLanes) Update(ctx context.Context, aSMSwimLane *v1.ASMSwimLa
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
 func (c *FakeASMSwimLanes) UpdateStatus(ctx context.Context, aSMSwimLane *v1.ASMSwimLane, opts metav1.UpdateOptions) (*v1.ASMSwimLane, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(asmswimlanesResource, "status", c.ns, aSMSwimLane), &v1.ASMSwimLane{})
-
+		Invokes(testing.NewRootUpdateSubresourceAction(asmswimlanesResource, "status", aSMSwimLane), &v1.ASMSwimLane{})
 	if obj == nil {
 		return nil, err
 	}
@@ -113,14 +106,13 @@ func (c *FakeASMSwimLanes) UpdateStatus(ctx context.Context, aSMSwimLane *v1.ASM
 // Delete takes name of the aSMSwimLane and deletes it. Returns an error if one occurs.
 func (c *FakeASMSwimLanes) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(asmswimlanesResource, c.ns, name, opts), &v1.ASMSwimLane{})
-
+		Invokes(testing.NewRootDeleteActionWithOptions(asmswimlanesResource, name, opts), &v1.ASMSwimLane{})
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeASMSwimLanes) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(asmswimlanesResource, c.ns, listOpts)
+	action := testing.NewRootDeleteCollectionAction(asmswimlanesResource, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1.ASMSwimLaneList{})
 	return err
@@ -129,8 +121,7 @@ func (c *FakeASMSwimLanes) DeleteCollection(ctx context.Context, opts metav1.Del
 // Patch applies the patch and returns the patched aSMSwimLane.
 func (c *FakeASMSwimLanes) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ASMSwimLane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(asmswimlanesResource, c.ns, name, pt, data, subresources...), &v1.ASMSwimLane{})
-
+		Invokes(testing.NewRootPatchSubresourceAction(asmswimlanesResource, name, pt, data, subresources...), &v1.ASMSwimLane{})
 	if obj == nil {
 		return nil, err
 	}

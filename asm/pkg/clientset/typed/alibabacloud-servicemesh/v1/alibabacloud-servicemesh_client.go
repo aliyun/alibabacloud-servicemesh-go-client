@@ -54,12 +54,12 @@ func (c *IstioV1Client) ASMLocalRateLimiters(namespace string) ASMLocalRateLimit
 	return newASMLocalRateLimiters(c, namespace)
 }
 
-func (c *IstioV1Client) ASMSwimLanes(namespace string) ASMSwimLaneInterface {
-	return newASMSwimLanes(c, namespace)
+func (c *IstioV1Client) ASMSwimLanes() ASMSwimLaneInterface {
+	return newASMSwimLanes(c)
 }
 
-func (c *IstioV1Client) ASMSwimLaneGroups(namespace string) ASMSwimLaneGroupInterface {
-	return newASMSwimLaneGroups(c, namespace)
+func (c *IstioV1Client) ASMSwimLaneGroups() ASMSwimLaneGroupInterface {
+	return newASMSwimLaneGroups(c)
 }
 
 // NewForConfig creates a new IstioV1Client for the given config.

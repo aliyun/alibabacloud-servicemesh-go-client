@@ -16,7 +16,7 @@
 package v1
 
 import (
-	clientset "istio.io/client-go/asm/pkg/clientset"
+	versioned "istio.io/client-go/asm/pkg/clientset/versioned"
 	internalinterfaces "istio.io/client-go/asm/pkg/informers/externalversions/internalinterfaces"
 	v1 "istio.io/client-go/asm/pkg/listers/alibabacloudservicemesh/v1"
 	"context"
@@ -44,14 +44,14 @@ type aSMKServeConfigInformer struct {
 // NewASMKServeConfigInformer constructs a new informer for ASMKServeConfig type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewASMKServeConfigInformer(client clientset.Interface, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+func NewASMKServeConfigInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
 	return NewFilteredASMKServeConfigInformer(client, resyncPeriod, indexers, nil)
 }
 
 // NewFilteredASMKServeConfigInformer constructs a new informer for ASMKServeConfig type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredASMKServeConfigInformer(client clientset.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredASMKServeConfigInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
@@ -73,7 +73,7 @@ func NewFilteredASMKServeConfigInformer(client clientset.Interface, resyncPeriod
 	)
 }
 
-func (f *aSMKServeConfigInformer) defaultInformer(client clientset.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
+func (f *aSMKServeConfigInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
 	return NewFilteredASMKServeConfigInformer(client, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 

@@ -16,7 +16,7 @@
 package v1
 
 import (
-	clientset "istio.io/client-go/asm/pkg/clientset"
+	versioned "istio.io/client-go/asm/pkg/clientset/versioned"
 	internalinterfaces "istio.io/client-go/asm/pkg/informers/externalversions/internalinterfaces"
 	v1 "istio.io/client-go/asm/pkg/listers/alibabacloudservicemesh/v1"
 	"context"
@@ -44,14 +44,14 @@ type aSMSecurityPolicyInformer struct {
 // NewASMSecurityPolicyInformer constructs a new informer for ASMSecurityPolicy type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewASMSecurityPolicyInformer(client clientset.Interface, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+func NewASMSecurityPolicyInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
 	return NewFilteredASMSecurityPolicyInformer(client, resyncPeriod, indexers, nil)
 }
 
 // NewFilteredASMSecurityPolicyInformer constructs a new informer for ASMSecurityPolicy type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredASMSecurityPolicyInformer(client clientset.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredASMSecurityPolicyInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
@@ -73,7 +73,7 @@ func NewFilteredASMSecurityPolicyInformer(client clientset.Interface, resyncPeri
 	)
 }
 
-func (f *aSMSecurityPolicyInformer) defaultInformer(client clientset.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
+func (f *aSMSecurityPolicyInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
 	return NewFilteredASMSecurityPolicyInformer(client, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 

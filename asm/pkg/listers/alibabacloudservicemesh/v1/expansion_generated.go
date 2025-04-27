@@ -91,6 +91,14 @@ type ASMGrpcJsonTranscoderListerExpansion interface{}
 // ASMGrpcJsonTranscoderNamespaceLister.
 type ASMGrpcJsonTranscoderNamespaceListerExpansion interface{}
 
+// ASMHashTaggingListerExpansion allows custom methods to be added to
+// ASMHashTaggingLister.
+type ASMHashTaggingListerExpansion interface{}
+
+// ASMHashTaggingNamespaceListerExpansion allows custom methods to be added to
+// ASMHashTaggingNamespaceLister.
+type ASMHashTaggingNamespaceListerExpansion interface{}
+
 // ASMKServeConfigListerExpansion allows custom methods to be added to
 // ASMKServeConfigLister.
 type ASMKServeConfigListerExpansion interface{}

@@ -16,7 +16,7 @@
 package internalinterfaces
 
 import (
-	clientset "istio.io/client-go/asm/pkg/clientset"
+	versioned "istio.io/client-go/asm/pkg/clientset/versioned"
 	time "time"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -24,8 +24,8 @@ import (
 	cache "k8s.io/client-go/tools/cache"
 )
 
-// NewInformerFunc takes clientset.Interface and time.Duration to return a SharedIndexInformer.
-type NewInformerFunc func(clientset.Interface, time.Duration) cache.SharedIndexInformer
+// NewInformerFunc takes versioned.Interface and time.Duration to return a SharedIndexInformer.
+type NewInformerFunc func(versioned.Interface, time.Duration) cache.SharedIndexInformer
 
 // SharedInformerFactory a small interface to allow for adding an informer without an import cycle
 type SharedInformerFactory interface {

@@ -41,6 +41,8 @@ type Interface interface {
 	ASMGlobalRateLimiters() ASMGlobalRateLimiterInformer
 	// ASMGrpcJsonTranscoders returns a ASMGrpcJsonTranscoderInformer.
 	ASMGrpcJsonTranscoders() ASMGrpcJsonTranscoderInformer
+	// ASMHashTaggings returns a ASMHashTaggingInformer.
+	ASMHashTaggings() ASMHashTaggingInformer
 	// ASMKServeConfigs returns a ASMKServeConfigInformer.
 	ASMKServeConfigs() ASMKServeConfigInformer
 	// ASMKnativeConfigs returns a ASMKnativeConfigInformer.
@@ -130,6 +132,11 @@ func (v *version) ASMGlobalRateLimiters() ASMGlobalRateLimiterInformer {
 // ASMGrpcJsonTranscoders returns a ASMGrpcJsonTranscoderInformer.
 func (v *version) ASMGrpcJsonTranscoders() ASMGrpcJsonTranscoderInformer {
 	return &aSMGrpcJsonTranscoderInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// ASMHashTaggings returns a ASMHashTaggingInformer.
+func (v *version) ASMHashTaggings() ASMHashTaggingInformer {
+	return &aSMHashTaggingInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // ASMKServeConfigs returns a ASMKServeConfigInformer.

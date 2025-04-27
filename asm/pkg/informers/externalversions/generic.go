@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	v1 "istio.io/api/alibabacloudservicemesh/v1"
+	v1beta1 "istio.io/api/alibabacloudservicemesh/v1beta1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -70,6 +71,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMGlobalRateLimiters().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("asmgrpcjsontranscoders"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMGrpcJsonTranscoders().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("asmhashtaggings"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMHashTaggings().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("asmkserveconfigs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMKServeConfigs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("asmknativeconfigs"):
@@ -98,6 +101,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().LLMProviders().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("llmroutes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().LLMRoutes().Informer()}, nil
+
+		// Group=istio.alibabacloud.com, Version=v1beta1
+	case v1beta1.SchemeGroupVersion.WithResource("asmproxyconfigs"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1beta1().ASMProxyConfigs().Informer()}, nil
+	case v1beta1.SchemeGroupVersion.WithResource("trafficlabels"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1beta1().TrafficLabels().Informer()}, nil
 
 	}
 

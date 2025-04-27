@@ -16,7 +16,7 @@
 package v1
 
 import (
-	clientset "istio.io/client-go/asm/pkg/clientset"
+	versioned "istio.io/client-go/asm/pkg/clientset/versioned"
 	internalinterfaces "istio.io/client-go/asm/pkg/informers/externalversions/internalinterfaces"
 	v1 "istio.io/client-go/asm/pkg/listers/alibabacloudservicemesh/v1"
 	"context"
@@ -45,14 +45,14 @@ type lLMProviderInformer struct {
 // NewLLMProviderInformer constructs a new informer for LLMProvider type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewLLMProviderInformer(client clientset.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+func NewLLMProviderInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
 	return NewFilteredLLMProviderInformer(client, namespace, resyncPeriod, indexers, nil)
 }
 
 // NewFilteredLLMProviderInformer constructs a new informer for LLMProvider type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredLLMProviderInformer(client clientset.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredLLMProviderInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
@@ -74,7 +74,7 @@ func NewFilteredLLMProviderInformer(client clientset.Interface, namespace string
 	)
 }
 
-func (f *lLMProviderInformer) defaultInformer(client clientset.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
+func (f *lLMProviderInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
 	return NewFilteredLLMProviderInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 

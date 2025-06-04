@@ -119,6 +119,14 @@ type ASMLocalRateLimiterNamespaceListerExpansion interface{}
 // ASMMigrateFromIstioLister.
 type ASMMigrateFromIstioListerExpansion interface{}
 
+// ASMOPAPolicyListerExpansion allows custom methods to be added to
+// ASMOPAPolicyLister.
+type ASMOPAPolicyListerExpansion interface{}
+
+// ASMOPAPolicyNamespaceListerExpansion allows custom methods to be added to
+// ASMOPAPolicyNamespaceLister.
+type ASMOPAPolicyNamespaceListerExpansion interface{}
+
 // ASMPacketInspectorListerExpansion allows custom methods to be added to
 // ASMPacketInspectorLister.
 type ASMPacketInspectorListerExpansion interface{}

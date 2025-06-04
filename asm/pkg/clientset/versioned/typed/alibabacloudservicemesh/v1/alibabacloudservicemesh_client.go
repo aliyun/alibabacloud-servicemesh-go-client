@@ -40,6 +40,7 @@ type IstioV1Interface interface {
 	ASMKnativeConfigsGetter
 	ASMLocalRateLimitersGetter
 	ASMMigrateFromIstiosGetter
+	ASMOPAPoliciesGetter
 	ASMPacketInspectorsGetter
 	ASMProxyConfigsGetter
 	ASMSecurityPoliciesGetter
@@ -115,6 +116,10 @@ func (c *IstioV1Client) ASMLocalRateLimiters(namespace string) ASMLocalRateLimit
 
 func (c *IstioV1Client) ASMMigrateFromIstios() ASMMigrateFromIstioInterface {
 	return newASMMigrateFromIstios(c)
+}
+
+func (c *IstioV1Client) ASMOPAPolicies(namespace string) ASMOPAPolicyInterface {
+	return newASMOPAPolicies(c, namespace)
 }
 
 func (c *IstioV1Client) ASMPacketInspectors() ASMPacketInspectorInterface {

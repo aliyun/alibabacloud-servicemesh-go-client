@@ -81,6 +81,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMLocalRateLimiters().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("asmmigratefromistios"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMMigrateFromIstios().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("asmopapolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMOPAPolicies().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("asmpacketinspectors"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMPacketInspectors().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("asmproxyconfigs"):

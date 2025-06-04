@@ -45,6 +45,8 @@ type ASMLocalRateLimiterExpansion interface{}
 
 type ASMMigrateFromIstioExpansion interface{}
 
+type ASMOPAPolicyExpansion interface{}
+
 type ASMPacketInspectorExpansion interface{}
 
 type ASMProxyConfigExpansion interface{}

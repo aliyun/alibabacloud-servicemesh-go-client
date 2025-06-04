@@ -51,6 +51,8 @@ type Interface interface {
 	ASMLocalRateLimiters() ASMLocalRateLimiterInformer
 	// ASMMigrateFromIstios returns a ASMMigrateFromIstioInformer.
 	ASMMigrateFromIstios() ASMMigrateFromIstioInformer
+	// ASMOPAPolicies returns a ASMOPAPolicyInformer.
+	ASMOPAPolicies() ASMOPAPolicyInformer
 	// ASMPacketInspectors returns a ASMPacketInspectorInformer.
 	ASMPacketInspectors() ASMPacketInspectorInformer
 	// ASMProxyConfigs returns a ASMProxyConfigInformer.
@@ -157,6 +159,11 @@ func (v *version) ASMLocalRateLimiters() ASMLocalRateLimiterInformer {
 // ASMMigrateFromIstios returns a ASMMigrateFromIstioInformer.
 func (v *version) ASMMigrateFromIstios() ASMMigrateFromIstioInformer {
 	return &aSMMigrateFromIstioInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// ASMOPAPolicies returns a ASMOPAPolicyInformer.
+func (v *version) ASMOPAPolicies() ASMOPAPolicyInformer {
+	return &aSMOPAPolicyInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // ASMPacketInspectors returns a ASMPacketInspectorInformer.

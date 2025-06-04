@@ -86,6 +86,10 @@ func (c *FakeIstioV1) ASMMigrateFromIstios() v1.ASMMigrateFromIstioInterface {
 	return &FakeASMMigrateFromIstios{c}
 }
 
+func (c *FakeIstioV1) ASMOPAPolicies(namespace string) v1.ASMOPAPolicyInterface {
+	return &FakeASMOPAPolicies{c, namespace}
+}
+
 func (c *FakeIstioV1) ASMPacketInspectors() v1.ASMPacketInspectorInterface {
 	return &FakeASMPacketInspectors{c}
 }

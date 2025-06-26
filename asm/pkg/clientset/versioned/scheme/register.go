@@ -18,6 +18,7 @@ package scheme
 import (
 	istiov1 "istio.io/api/alibabacloudservicemesh/v1"
 	istiov1beta1 "istio.io/api/alibabacloudservicemesh/v1beta1"
+	amperev1 "istio.io/api/ampere/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -31,6 +32,7 @@ var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
 	istiov1.AddToScheme,
 	istiov1beta1.AddToScheme,
+	amperev1.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

@@ -18,6 +18,7 @@ package externalversions
 import (
 	versioned "istio.io/client-go/asm/pkg/clientset/versioned"
 	alibabacloudservicemesh "istio.io/client-go/asm/pkg/informers/externalversions/alibabacloudservicemesh"
+	ampere "istio.io/client-go/asm/pkg/informers/externalversions/ampere"
 	internalinterfaces "istio.io/client-go/asm/pkg/informers/externalversions/internalinterfaces"
 	reflect "reflect"
 	sync "sync"
@@ -241,8 +242,13 @@ type SharedInformerFactory interface {
 	InformerFor(obj runtime.Object, newFunc internalinterfaces.NewInformerFunc) cache.SharedIndexInformer
 
 	Istio() alibabacloudservicemesh.Interface
+	Ampere() ampere.Interface
 }
 
 func (f *sharedInformerFactory) Istio() alibabacloudservicemesh.Interface {
 	return alibabacloudservicemesh.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Ampere() ampere.Interface {
+	return ampere.New(f, f.namespace, f.tweakListOptions)
 }

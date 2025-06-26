@@ -18,6 +18,7 @@ package versioned
 import (
 	istiov1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/alibabacloudservicemesh/v1"
 	istiov1beta1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/alibabacloudservicemesh/v1beta1"
+	amperev1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/ampere/v1"
 	"fmt"
 	"net/http"
 
@@ -30,6 +31,7 @@ type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	IstioV1() istiov1.IstioV1Interface
 	IstioV1beta1() istiov1beta1.IstioV1beta1Interface
+	AmpereV1() amperev1.AmpereV1Interface
 }
 
 // Clientset contains the clients for groups.
@@ -37,6 +39,7 @@ type Clientset struct {
 	*discovery.DiscoveryClient
 	istioV1      *istiov1.IstioV1Client
 	istioV1beta1 *istiov1beta1.IstioV1beta1Client
+	ampereV1     *amperev1.AmpereV1Client
 }
 
 // IstioV1 retrieves the IstioV1Client
@@ -47,6 +50,11 @@ func (c *Clientset) IstioV1() istiov1.IstioV1Interface {
 // IstioV1beta1 retrieves the IstioV1beta1Client
 func (c *Clientset) IstioV1beta1() istiov1beta1.IstioV1beta1Interface {
 	return c.istioV1beta1
+}
+
+// AmpereV1 retrieves the AmpereV1Client
+func (c *Clientset) AmpereV1() amperev1.AmpereV1Interface {
+	return c.ampereV1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -101,6 +109,10 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
+	cs.ampereV1, err = amperev1.NewForConfigAndClient(&configShallowCopy, httpClient)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
@@ -124,6 +136,7 @@ func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.istioV1 = istiov1.New(c)
 	cs.istioV1beta1 = istiov1beta1.New(c)
+	cs.ampereV1 = amperev1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

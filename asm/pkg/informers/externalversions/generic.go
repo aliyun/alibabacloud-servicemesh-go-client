@@ -18,8 +18,9 @@ package externalversions
 import (
 	"fmt"
 
-	v1 "istio.io/api/alibabacloudservicemesh/v1"
+	alibabacloudservicemeshv1 "istio.io/api/alibabacloudservicemesh/v1"
 	v1beta1 "istio.io/api/alibabacloudservicemesh/v1beta1"
+	v1 "istio.io/api/ampere/v1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -50,58 +51,72 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=istio.alibabacloud.com, Version=v1
-	case v1.SchemeGroupVersion.WithResource("asmadaptiveconcurrencies"):
+	// Group=ampere, Version=v1
+	case v1.SchemeGroupVersion.WithResource("averagelatencyschedulingpolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Ampere().V1().AverageLatencySchedulingPolicies().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("concurrencylimitingpolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Ampere().V1().ConcurrencyLimitingPolicies().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("concurrencyschedulingpolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Ampere().V1().ConcurrencySchedulingPolicies().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("loadrampingpolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Ampere().V1().LoadRampingPolicies().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("policies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Ampere().V1().Policies().Informer()}, nil
+	case v1.SchemeGroupVersion.WithResource("ratelimitingpolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Ampere().V1().RateLimitingPolicies().Informer()}, nil
+
+		// Group=istio.alibabacloud.com, Version=v1
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmadaptiveconcurrencies"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMAdaptiveConcurrencies().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmcircuitbreakers"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmcircuitbreakers"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMCircuitBreakers().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmcompressors"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmcompressors"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMCompressors().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmcredentials"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmcredentials"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMCredentials().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmcustomproxyconfiginjectiontemplates"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmcustomproxyconfiginjectiontemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMCustomProxyConfigInjectionTemplates().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmdecompressors"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmdecompressors"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMDecompressors().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmegresstrafficpolicies"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmegresstrafficpolicies"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMEgressTrafficPolicies().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmextensionproviders"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmextensionproviders"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMExtensionProviders().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmglobalratelimiters"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmglobalratelimiters"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMGlobalRateLimiters().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmgrpcjsontranscoders"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmgrpcjsontranscoders"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMGrpcJsonTranscoders().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmhashtaggings"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmhashtaggings"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMHashTaggings().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmkserveconfigs"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmkserveconfigs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMKServeConfigs().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmknativeconfigs"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmknativeconfigs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMKnativeConfigs().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmlocalratelimiters"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmlocalratelimiters"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMLocalRateLimiters().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmmigratefromistios"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmmigratefromistios"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMMigrateFromIstios().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmopapolicies"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmopapolicies"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMOPAPolicies().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmpacketinspectors"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmpacketinspectors"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMPacketInspectors().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmproxyconfigs"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmproxyconfigs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMProxyConfigs().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmsecuritypolicies"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmsecuritypolicies"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMSecurityPolicies().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmswimlanes"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmswimlanes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMSwimLanes().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("asmswimlanegroups"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("asmswimlanegroups"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().ASMSwimLaneGroups().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("envoyfiltertemplates"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("envoyfiltertemplates"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().EnvoyFilterTemplates().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("envoyfiltertemplatebindings"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("envoyfiltertemplatebindings"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().EnvoyFilterTemplateBindings().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("istiogateways"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("istiogateways"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().IstioGateways().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("llmproviders"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("llmproviders"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().LLMProviders().Informer()}, nil
-	case v1.SchemeGroupVersion.WithResource("llmroutes"):
+	case alibabacloudservicemeshv1.SchemeGroupVersion.WithResource("llmroutes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Istio().V1().LLMRoutes().Informer()}, nil
 
 		// Group=istio.alibabacloud.com, Version=v1beta1

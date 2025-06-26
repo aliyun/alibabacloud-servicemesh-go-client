@@ -21,6 +21,8 @@ import (
 	fakeistiov1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/alibabacloudservicemesh/v1/fake"
 	istiov1beta1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/alibabacloudservicemesh/v1beta1"
 	fakeistiov1beta1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/alibabacloudservicemesh/v1beta1/fake"
+	amperev1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/ampere/v1"
+	fakeamperev1 "istio.io/client-go/asm/pkg/clientset/versioned/typed/ampere/v1/fake"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -87,4 +89,9 @@ func (c *Clientset) IstioV1() istiov1.IstioV1Interface {
 // IstioV1beta1 retrieves the IstioV1beta1Client
 func (c *Clientset) IstioV1beta1() istiov1beta1.IstioV1beta1Interface {
 	return &fakeistiov1beta1.FakeIstioV1beta1{Fake: &c.Fake}
+}
+
+// AmpereV1 retrieves the AmpereV1Client
+func (c *Clientset) AmpereV1() amperev1.AmpereV1Interface {
+	return &fakeamperev1.FakeAmpereV1{Fake: &c.Fake}
 }

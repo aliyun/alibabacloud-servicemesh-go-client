@@ -64,4 +64,4 @@ require (
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
-replace istio.io/api => github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20260419025214-59148eb1c5d0
+replace istio.io/api => github.com/aliyun/alibabacloud-servicemesh-api v0.0.0-20260717031725-7a64c7a72cff
